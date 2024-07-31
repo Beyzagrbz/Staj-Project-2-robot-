@@ -5,14 +5,27 @@ using UnityEngine;
 public class FallingRock : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] GameObject ParticleEffect;
+    [SerializeField] GameObject RockParticle;
+    [SerializeField] GameObject BloodLake;
+    GameObject PlayerObj;
+    
+    private void Start()
+    {
+        PlayerObj= GameObject.FindGameObjectWithTag("PlayerAnimation");
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag !="Player")
         
         {
-            Instantiate(ParticleEffect,transform.position,Quaternion.identity);
+            Instantiate(RockParticle,transform.position,Quaternion.identity);
             Destroy(gameObject);
+        }
+        else if (collision.gameObject.tag=="Player")
+        {
+            PlayerObj.GetComponent<Animator>().SetBool("IsDead",true);
+            Instantiate(BloodLake,collision.contacts[0].point,Quaternion.identity,collision.gameObject.transform);
+
         }
         
     }

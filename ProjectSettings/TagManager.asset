@@ -6,6 +6,8 @@ TagManager:
   tags:
   - PlayerObj
   - PlayerAnimation
+  - Restart
+  - EnterRagdol
   layers:
   - Default
   - TransparentFX

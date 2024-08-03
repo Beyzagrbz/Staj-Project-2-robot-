@@ -8,7 +8,7 @@ public class AnimatorController : MonoBehaviour
 {
   Animator animator;
  
-  [SerializeField]SUPERCharacterAIO Controller;
+  public SUPERCharacterAIO Controller;
   private void Start()
   {
     animator=GetComponent<Animator>();
@@ -16,8 +16,13 @@ public class AnimatorController : MonoBehaviour
   private void Update()
   {
     AnimatorStateInfo animatorStateInfo= animator.GetCurrentAnimatorStateInfo(0);
+if(animator.GetBool("IsDead"))
+{
+  Controller.enableMovementControl =false;
+  Controller.canJump = false;
+}
 
-    if(Input.GetKey(KeyCode.Q)&& animator.GetFloat("Speed")<0.3f)
+    if(Input.GetKey(KeyCode.H)&& animator.GetFloat("Speed")<0.3f)
     {
         animator.SetBool("Dance",true);
         Controller.enableMovementControl =false;
